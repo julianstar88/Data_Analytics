@@ -21,7 +21,8 @@ plt.figure(figsize=(10, 6))
 record_counts_per_origin = df['Origin'].value_counts().reindex(fixed_order)
 
 # Create the bar plot with consistent colors and black borders
-record_counts_per_origin.plot(kind='bar', color=[origin_colors[origin] for origin in record_counts_per_origin.index], edgecolor='black')
+record_counts_per_origin.plot(kind='bar', color=[origin_colors[origin] for origin in record_counts_per_origin.index],
+                              edgecolor='black')
 
 plt.title('Count of Records per Origin')
 plt.xlabel('Origin')

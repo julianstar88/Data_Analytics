@@ -22,7 +22,8 @@ plt.figure(figsize=(10, 6))
 record_counts_per_origin = df['Origin'].value_counts().reindex(fixed_order)
 
 # Create the bar plot with consistent colors and black borders
-record_counts_per_origin.plot(kind='bar', color=[origin_colors[origin] for origin in record_counts_per_origin.index], edgecolor='black')
+record_counts_per_origin.plot(kind='bar', color=[origin_colors[origin] for origin in record_counts_per_origin.index],
+                              edgecolor='black')
 
 plt.title('Count of Records per Origin')
 plt.xlabel('Origin')
@@ -63,7 +64,8 @@ plt.show()
 rating_counts = df.groupby(['Rating', 'Origin']).size().unstack().fillna(0).reindex(columns=fixed_order)
 
 # Create the stacked bar chart
-rating_counts.plot(kind='bar', stacked=True, figsize=(10, 6), color=[origin_colors[origin] for origin in rating_counts.columns], edgecolor='black')
+rating_counts.plot(kind='bar', stacked=True, figsize=(10, 6),
+                   color=[origin_colors[origin] for origin in rating_counts.columns], edgecolor='black')
 
 plt.title('Stacked Bar Chart of Ratings by Origin')
 plt.xlabel('Rating')
@@ -102,7 +104,7 @@ sns.scatterplot(x='Rating', y='Review_Length', data=df, color='grey', s=50)
 
 # Calculate the regression line
 slope, intercept, r_value, p_value, std_err = linregress(df['Rating'], df['Review_Length'])
-plt.plot(df['Rating'], intercept + slope * df['Rating'], 'r', label=f'R² = {r_value**2:.2f}, p = {p_value:.2e}')
+plt.plot(df['Rating'], intercept + slope * df['Rating'], 'r', label=f'R² = {r_value ** 2:.2f}, p = {p_value:.2e}')
 
 plt.title('Scatter Plot of Review Length vs Rating with Correlation Line')
 plt.xlabel('Rating')
