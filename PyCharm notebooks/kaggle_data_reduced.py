@@ -3,7 +3,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Load the combined DataFrame from the CSV file
-df = pd.read_csv("kaggle_data_reduced.csv")
+df = pd.read_csv("../kaggle data/kaggle_data_reduced.csv.gz", compression="gzip")
 
 # Define a color palette to use consistently
 palette = sns.color_palette("Set3", len(df['Origin'].unique()))
