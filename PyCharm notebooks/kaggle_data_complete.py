@@ -3,17 +3,22 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Load the combined DataFrame from the CSV file
-df = pd.read_csv("../kaggle data/kaggle_data_complete.csv.gz", compression="gzip")
+df = pd.read_csv("../kaggle_data_complete.csv.gz", compression="gzip")
+
+# Define a fixed order for the origins
+fixed_order = ['andrewmvd', 'arnabchaki', 'rifkiandriyanto', 'thedevastator']
+df['Origin'] = pd.Categorical(df['Origin'], categories=fixed_order, ordered=True)
 
 # Define a color palette to use consistently
-palette = sns.color_palette("Set3", len(df['Origin'].unique()))
-origin_colors = dict(zip(df['Origin'].unique(), palette))
+palette = sns.color_palette("Set2", len(fixed_order))
+origin_colors = dict(zip(fixed_order, palette))
 
+''' bar plot with count of records per origin '''
 # Create a bar plot showing the count of records per origin with black borders
 plt.figure(figsize=(10, 6))
 
 # Count the number of records per origin
-record_counts_per_origin = df['Origin'].value_counts()
+record_counts_per_origin = df['Origin'].value_counts().reindex(fixed_order)
 
 # Create the bar plot with consistent colors and black borders
 record_counts_per_origin.plot(kind='bar', color=[origin_colors[origin] for origin in record_counts_per_origin.index], edgecolor='black')
@@ -28,6 +33,7 @@ plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.tight_layout()
 plt.show()
 
+''' box plot with distribution of ratings per origin '''
 # Create a box plot showing the distribution of ratings per origin with consistent colors and black borders, and include the mean
 plt.figure(figsize=(10, 6))
 
