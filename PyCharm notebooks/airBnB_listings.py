@@ -86,8 +86,8 @@ df_LosAngeles.rename(columns={"id": "listing_id",
 # check data types
 dtypes_LosAngeles = df_LosAngeles.dtypes
 print("different data types (Amsterdam vs. Los Angeles):",
-      dtypes_Amsterdam[dtypes_LosAngeles != dtypes_Amsterdam], "vs."
-,      dtypes_LosAngeles[dtypes_LosAngeles != dtypes_Amsterdam])
+      dtypes_Amsterdam[dtypes_LosAngeles != dtypes_Amsterdam], "vs.",
+      dtypes_LosAngeles[dtypes_LosAngeles != dtypes_Amsterdam])
 df_Amsterdam["host_listings_count"] = df_Amsterdam["host_listings_count"].astype(float)
 df_Antwerp["host_listings_count"] = df_Antwerp["host_listings_count"].astype(float)
 df_Rotterdam["host_listings_count"] = df_Rotterdam["host_listings_count"].astype(float)
