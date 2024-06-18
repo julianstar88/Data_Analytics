@@ -1,9 +1,9 @@
 import pandas as pd
 
 columns = [
-    "name", "description", "neighborhood_overview", "host_id", "host_name", "host_since", "host_location", "host_about",
-    "host_response_time", "host_response_rate", "host_acceptance_rate", "host_is_superhost", "host_listings_count",
-    "host_total_listings_count", "host_verifications", "host_identity_verified", "neighbourhood",
+    "id", "name", "description", "neighborhood_overview", "host_id", "host_name", "host_since", "host_location",
+    "host_about", "host_response_time", "host_response_rate", "host_acceptance_rate", "host_is_superhost",
+    "host_listings_count", "host_total_listings_count", "host_verifications", "host_identity_verified", "neighbourhood",
     "neighbourhood_cleansed", "latitude", "longitude", "property_type", "room_type", "accommodates", "bathrooms",
     "bathrooms_text", "bedrooms", "beds", "amenities", "price", "minimum_nights", "maximum_nights",
     "minimum_minimum_nights", "maximum_minimum_nights", "minimum_maximum_nights", "maximum_maximum_nights",
@@ -23,7 +23,8 @@ df_Amsterdam = df_Amsterdam[columns]
 
 # extract currency from column price
 df_Amsterdam["price"] = df_Amsterdam["price"].replace("[\$,]", "", regex=True).astype(float)
-df_Amsterdam.rename(columns={"price": "price_$"}, inplace=True)
+df_Amsterdam.rename(columns={"id": "listing_id",
+                             "price": "price_$"}, inplace=True)
 
 # check data types
 dtypes_Amsterdam = df_Amsterdam.dtypes
@@ -37,7 +38,8 @@ df_Antwerp = df_Antwerp[columns]
 
 # extract currency from column price
 df_Antwerp["price"] = df_Antwerp["price"].replace("[\$,]", "", regex=True).astype(float)
-df_Antwerp.rename(columns={"price": "price_$"}, inplace=True)
+df_Antwerp.rename(columns={"id": "listing_id",
+                           "price": "price_$"}, inplace=True)
 
 # check data types
 dtypes_Antwerp = df_Antwerp.dtypes
@@ -55,7 +57,8 @@ df_Rotterdam = df_Rotterdam[columns]
 
 # extract currency from column price
 df_Rotterdam["price"] = df_Rotterdam["price"].replace("[\$,]", "", regex=True).astype(float)
-df_Rotterdam.rename(columns={"price": "price_$"}, inplace=True)
+df_Rotterdam.rename(columns={"id": "listing_id",
+                             "price": "price_$"}, inplace=True)
 
 # check data types
 dtypes_Rotterdam = df_Rotterdam.dtypes
@@ -73,7 +76,8 @@ df_LosAngeles = df_LosAngeles[columns]
 
 # extract currency from column price
 df_LosAngeles["price"] = df_LosAngeles["price"].replace("[\$,]", "", regex=True).astype(float)
-df_LosAngeles.rename(columns={"price": "price_$"}, inplace=True)
+df_LosAngeles.rename(columns={"id": "listing_id",
+                              "price": "price_$"}, inplace=True)
 
 # check data types
 dtypes_LosAngeles = df_LosAngeles.dtypes
