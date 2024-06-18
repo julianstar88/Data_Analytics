@@ -24,7 +24,8 @@ df_Amsterdam = df_Amsterdam[columns]
 # extract currency from column price
 df_Amsterdam["price"] = df_Amsterdam["price"].replace("[\$,]", "", regex=True).astype(float)
 df_Amsterdam.rename(columns={"id": "listing_id",
-                             "price": "price_$"}, inplace=True)
+                             "price": "price_$"},
+                    inplace=True)
 
 # check data types
 dtypes_Amsterdam = df_Amsterdam.dtypes
@@ -39,7 +40,8 @@ df_Antwerp = df_Antwerp[columns]
 # extract currency from column price
 df_Antwerp["price"] = df_Antwerp["price"].replace("[\$,]", "", regex=True).astype(float)
 df_Antwerp.rename(columns={"id": "listing_id",
-                           "price": "price_$"}, inplace=True)
+                           "price": "price_$"},
+                  inplace=True)
 
 # check data types
 dtypes_Antwerp = df_Antwerp.dtypes
@@ -58,7 +60,8 @@ df_Rotterdam = df_Rotterdam[columns]
 # extract currency from column price
 df_Rotterdam["price"] = df_Rotterdam["price"].replace("[\$,]", "", regex=True).astype(float)
 df_Rotterdam.rename(columns={"id": "listing_id",
-                             "price": "price_$"}, inplace=True)
+                             "price": "price_$"},
+                    inplace=True)
 
 # check data types
 dtypes_Rotterdam = df_Rotterdam.dtypes
@@ -77,7 +80,8 @@ df_LosAngeles = df_LosAngeles[columns]
 # extract currency from column price
 df_LosAngeles["price"] = df_LosAngeles["price"].replace("[\$,]", "", regex=True).astype(float)
 df_LosAngeles.rename(columns={"id": "listing_id",
-                              "price": "price_$"}, inplace=True)
+                              "price": "price_$"},
+                     inplace=True)
 
 # check data types
 dtypes_LosAngeles = df_LosAngeles.dtypes
