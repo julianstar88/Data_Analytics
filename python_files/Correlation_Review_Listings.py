@@ -19,15 +19,24 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 
-#%%
-
+#%% Voreinstellungen
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
-
-#%% Einlesen
 
 # data_path = r"C:\Users\Tung\OneDrive\Data_Analyst_Alfa\Woche 4\reviews.csv"
 path_review = "../data/cities/reviews_Antwerp.csv"
 path_listings = "../data/cities/listings_Antwerp.csv"
+
+# Speicherpfad und Dateinamen definieren
+save_path = "../data/cities/processed"
+filename = os.path.splitext(os.path.basename(path_listings))[0]
+new_filename = f"{filename}_processed.csv"
+full_save_path = os.path.join(save_path, new_filename)
+
+# Verzeichnis erstellen, falls es nicht existiert
+if not os.path.exists(save_path):
+    os.makedirs(save_path)
+
+#%% Einlesen
 
 # df_full = pd.read_csv(data_path)
 df_review = pd.read_csv(path_review)
@@ -171,4 +180,12 @@ if plt_0:
 
 # Berechne, wie oft jede listing_id vorkommt
 listing_id_counts = df_review['listing_id'].value_counts()
+
+#%% Speichern der neuen CSV
+
+if not os.path.exists(save_path):
+    os.makedirs(save_path)
+
+df_listings.to_csv(full_save_path, index=False)
+print(f"Datei wurde gespeichert als {full_save_path}")
 
