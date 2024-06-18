@@ -52,7 +52,7 @@ df_Antwerp["description"] = df_Antwerp["description"].astype(object)
 
 ''' Rotterdam '''
 # url: https://data.insideairbnb.com/the-netherlands/south-holland/rotterdam/2023-12-23/data/listings.csv.gz
-data_Rotterdam = pd.read_csv("airBnB/listings_Antwerp.csv.gz", compression="gzip")
+data_Rotterdam = pd.read_csv("airBnB/listings_Rotterdam.csv.gz", compression="gzip")
 
 df_Rotterdam = pd.DataFrame(data_Rotterdam)
 df_Rotterdam = df_Rotterdam[columns]
