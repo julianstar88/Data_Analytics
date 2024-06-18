@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from scipy.stats import linregress
 
 # Load the combined DataFrame from the CSV file
-df = pd.read_csv("../kaggle data/kaggle_data_reduced.csv.gz", compression="gzip")
+df = pd.read_csv("../data/machine_learning/kaggle_data_reduced.csv.gz", compression="gzip")
 
 # Define a fixed order for the origins
 fixed_order = ['andrewmvd', 'rifkiandriyanto', 'thedevastator']

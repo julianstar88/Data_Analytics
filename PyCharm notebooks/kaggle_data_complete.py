@@ -3,7 +3,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Load the combined DataFrame from the CSV file
-df = pd.read_csv("../kaggle_data_complete.csv.gz", compression="gzip")
+df = pd.read_csv("../data/machine_learning/kaggle_data_complete.csv.gz", compression="gzip")
 
 # Define a fixed order for the origins
 fixed_order = ['andrewmvd', 'arnabchaki', 'rifkiandriyanto', 'thedevastator']
