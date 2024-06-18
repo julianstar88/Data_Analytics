@@ -40,7 +40,7 @@ print("different data types (Amsterdam vs. Rotterdam):",
 
 ''' Los Angeles '''
 # url: https://data.insideairbnb.com/united-states/ca/los-angeles/2024-03-11/data/reviews.csv.gz
-data_LosAngeles = pd.read_csv("../../reviews_LosAngeles.csv.gz", compression="gzip")
+data_LosAngeles = pd.read_csv("airBnB/reviews_LosAngeles.csv.gz", compression="gzip")
 
 df_LosAngeles = pd.DataFrame(data_LosAngeles)
 df_LosAngeles = df_LosAngeles[columns]
