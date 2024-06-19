@@ -14,7 +14,6 @@ def detect_language(text):
 ''' Amsterdam '''
 # url: https://data.insideairbnb.com/the-netherlands/north-holland/amsterdam/2024-03-11/data/reviews.csv.gz
 data_Amsterdam = pd.read_csv("airBnB/reviews_Amsterdam.csv.gz", compression="gzip")
-
 df_Amsterdam = pd.DataFrame(data_Amsterdam)
 
 # check data types
