@@ -1,17 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Jun 17 15:10:12 2024
-
-@author: Tung
-"""
-
-# -*- coding: utf-8 -*-
-"""
 Created on Mon Jun 17 10:23:13 2024
 
 @author: Tung
 
-Gilt der Voranalyse der Airbnb-Daten
+Beinhaltet:
+    - Voranalyse der gegebenen Daten
+    - Säuberung der Daten
+    - Erstellung der _processed-Daten für Training der ML-Modelle
 """
 import os
 import pandas as pd
@@ -35,58 +31,61 @@ def extract_city_name(file_path):
     raise ValueError(f"Städtenamen konnten nicht aus dem Dateipfad extrahiert werden: {file_path}")
     
 
-plt_0 = 1
-check_num_rev = 0
-bool_save = 0
-bool_edit = 0
+plt_0 = 1   #Visualisierung
+check_num_rev = 0   #Überprüfung der 0-Werte
+bool_save = 0   #Speicherung der neuen _processed-CSV
+mult_reviews = 1    #Mehrere reviews.csv-Daten für eine Stadt (?)
 #%% Voreinstellungen
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
-
-p0 = r"C:\Users\Tung\OneDrive\Data_Analyst_Alfa\Data_Analytics\data\cities\reviews_Amsterdam_1.csv"
-p1 = r"C:\Users\Tung\OneDrive\Data_Analyst_Alfa\Data_Analytics\data\cities\reviews_Amsterdam_2.csv"
-# p2 = r"C:\Users\Tung\OneDrive\Data_Analyst_Alfa\Data_Analytics\data\cities\reviews_LosAngeles_en_5.csv"
-# p3 = r"C:\Users\Tung\OneDrive\Data_Analyst_Alfa\Data_Analytics\data\cities\reviews_LosAngeles_en_4.csv"
-# p4 = r"C:\Users\Tung\OneDrive\Data_Analyst_Alfa\Data_Analytics\data\cities\reviews_LosAngeles_en_3.csv"
-# p5 = r"C:\Users\Tung\OneDrive\Data_Analyst_Alfa\Data_Analytics\data\cities\reviews_LosAngeles_en_2.csv"
-# p6 = r"C:\Users\Tung\OneDrive\Data_Analyst_Alfa\Data_Analytics\data\cities\reviews_LosAngeles_en_1.csv"
-
-# path_review = "../data/cities/reviews_Antwerp.csv"
+if mult_reviews:
+    p0 = r"C:\Users\Tung\OneDrive\Data_Analyst_Alfa\Data_Analytics\data\cities\reviews_Amsterdam_1.csv"
+    p1 = r"C:\Users\Tung\OneDrive\Data_Analyst_Alfa\Data_Analytics\data\cities\reviews_Amsterdam_2.csv"
+    # p2 = r"C:\Users\Tung\OneDrive\Data_Analyst_Alfa\Data_Analytics\data\cities\reviews_LosAngeles_en_5.csv"
+    # p3 = r"C:\Users\Tung\OneDrive\Data_Analyst_Alfa\Data_Analytics\data\cities\reviews_LosAngeles_en_4.csv"
+    # p4 = r"C:\Users\Tung\OneDrive\Data_Analyst_Alfa\Data_Analytics\data\cities\reviews_LosAngeles_en_3.csv"
+    # p5 = r"C:\Users\Tung\OneDrive\Data_Analyst_Alfa\Data_Analytics\data\cities\reviews_LosAngeles_en_2.csv"
+    # p6 = r"C:\Users\Tung\OneDrive\Data_Analyst_Alfa\Data_Analytics\data\cities\reviews_LosAngeles_en_1.csv"
+    
+    city_name_0 = extract_city_name(p0)
+else:
+    path_review = "../data/cities/reviews_Antwerp.csv"
+    
+    city_name_0 = extract_city_name(path_review)
 
 path_listings = "../data/cities/listings_Amsterdam.csv"
-
-
-city_name_0 = extract_city_name(p0)
 city_name_1 = extract_city_name(path_listings)
 
 # Vergleiche die Städtenamen
 if city_name_0 != city_name_1:
     raise ValueError(f"Die Städtenamen am Ende der CSV-Dateien stimmen nicht überein: {city_name_0}, {city_name_1}")
 
-# Speicherpfad und Dateinamen definieren
-save_path = "../data/cities/processed"
-filename = os.path.splitext(os.path.basename(path_listings))[0]
-new_filename = f"{filename}_processed.csv"
-full_save_path = os.path.join(save_path, new_filename)
+if bool_save:
+    # Speicherpfad und Dateinamen definieren
+    save_path = "../data/cities/processed"
+    filename = os.path.splitext(os.path.basename(path_listings))[0]
+    new_filename = f"{filename}_processed.csv"
+    full_save_path = os.path.join(save_path, new_filename)
 
-# Verzeichnis erstellen, falls es nicht existiert
-if not os.path.exists(save_path):
-    os.makedirs(save_path)
+    # Verzeichnis erstellen, falls es nicht existiert
+    if not os.path.exists(save_path):
+        os.makedirs(save_path)
 
 #%% Einlesen
 
-# Liste der Pfade
-file_paths = [p0, p1]
-# Liste für die einzelnen DataFrames
-dfs = []
-# Einlesen und Zusammenfügen der CSV-Dateien
-for path in file_paths:
-    df = pd.read_csv(path)
-    dfs.append(df)
-# Zusammenführen aller DataFrames zu einem einzigen DataFrame
-df_review = pd.concat(dfs, ignore_index=True)
-
-
-# df_review = pd.read_csv(path_review)
+if mult_reviews:
+    # Liste der Pfade
+    file_paths = [p0, p1]
+    # Liste für die einzelnen DataFrames
+    dfs = []
+    # Einlesen und Zusammenfügen der CSV-Dateien
+    for path in file_paths:
+        df = pd.read_csv(path)
+        dfs.append(df)
+    # Zusammenführen aller DataFrames zu einem einzigen DataFrame
+    df_review = pd.concat(dfs, ignore_index=True)
+else:
+    df_review = pd.read_csv(path_review)
+    
 df_listings = pd.read_csv(path_listings)
 
 #%% Vorverarbeitung
