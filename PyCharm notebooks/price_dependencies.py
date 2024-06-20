@@ -11,10 +11,10 @@ from scipy.stats import linregress
 @st.cache_data
 def load_data():
     city_files = {
-        'Amsterdam, Netherlands': "../data/cities/listings_Amsterdam_finished.csv",
-        'Antwerp, Belgium': "../data/cities/listings_Antwerp_finished.csv",
-        'Los Angeles, USA': "../data/cities/listings_LosAngeles_finished.csv",
-        'Rotterdam, Netherlands': "../data/cities/listings_Rotterdam_finished.csv"
+        'Amsterdam, Netherlands': "listings_Amsterdam_finished.csv",
+        'Antwerp, Belgium': "listings_Antwerp_finished.csv",
+        'Los Angeles, USA': "listings_LosAngeles_finished.csv",
+        'Rotterdam, Netherlands': "listings_Rotterdam_finished.csv"
     }
 
     city_data = {}
@@ -27,9 +27,6 @@ def load_data():
                      'review_scores_rating': 'rating (original)',
                      'rf_predict_avg': 'rating (rf-prediction)',
                      'xgb_predict_avg': 'rating (xgb-prediction)'})
-        # Remove outliers
-        df = df[df['price_$'] < 6000]
-        df = df[df['beds'] < 30]
 
         city_data[city] = df
 
@@ -41,7 +38,7 @@ city_data = load_data()
 
 # Create lists for selection boxes
 cities = list(city_data.keys())
-columns = ['neighbourhood', 'room type', 'accommodates', 'beds', 'rating (original)', 'rating (rf-prediction)',
+columns = ['neighbourhood', 'room type', 'accommodates', 'rating (original)', 'rating (rf-prediction)',
            'rating (xgb-prediction)']
 
 # Streamlit title
@@ -53,6 +50,12 @@ selected_column = st.sidebar.selectbox('Select the factor to analyze', columns)
 
 # Select the appropriate dataframe based on city selection
 df = city_data[selected_city]
+
+# Slider for price range
+price_min, price_max = int(df['price_$'].min()), int(df['price_$'].max())
+default_price_max = min(price_max, 1000)
+selected_price_range = st.sidebar.slider('Select the price range', price_min, price_max, (price_min, default_price_max), step=50)
+df = df[(df['price_$'] >= selected_price_range[0]) & (df['price_$'] <= selected_price_range[1])]
 
 # Slider for top N neighbourhoods
 if selected_column == 'neighbourhood':
@@ -69,7 +72,7 @@ if selected_column in ['rating (original)', 'rating (rf-prediction)', 'rating (x
 
 # Remove rows with NaN values in the relevant columns
 df = df.dropna(
-    subset=['price_$', 'neighbourhood', 'room type', 'accommodates', 'beds',
+    subset=['price_$', 'neighbourhood', 'room type', 'accommodates',
             'rating (original)', 'rating (rf-prediction)', 'rating (xgb-prediction)'])
 
 # Plotting
