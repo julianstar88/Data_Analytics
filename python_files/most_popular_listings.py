@@ -22,7 +22,6 @@ def load_data(path: pl.Path | str, compression: None | str = None) -> pd.DataFra
 
 ### setup
 
-# TODO: los Angeles
 listings_dir = pl.Path(r"data\cities\finished")
 listings_files = list()
 for item in listings_dir.iterdir():
@@ -78,32 +77,45 @@ col3.markdown(string)
 col3.write(ranking_cut_off)
 
 
+
+
+## ranking data
+map_df = listings[["id", "latitude", "longitude", "room_type", "price_$", "review_scores_rating", "neighbourhood_cleansed"]]
+map_df = map_df.sort_values(by="review_scores_rating", ascending=False).take(list(range(ranking_cut_off)))
+
+
+
+
+
 ## overview of listings
 string = """
     ### Overview
 """
 st.markdown(string)
-map_df = listings[["id", "latitude", "longitude", "room_type", "price_$", "review_scores_rating", "neighbourhood_cleansed"]]
-if nh_filter_selectbox is not None:
-    map_df = map_df[map_df["neighbourhood_cleansed"] == nh_filter_selectbox]
 
-st.map(data=map_df, use_container_width=True, size=1, zoom=10)
+map_data = map_df
+if nh_filter_selectbox is not None:
+
+    map_filter = map_df[map_df["neighbourhood_cleansed"] == nh_filter_selectbox]
+
+    if map_filter.size <= 0:
+        map_data = map_df
+    else:
+        map_data = map_filter
+
+st.map(data=map_data, use_container_width=True, size=1, zoom=10)
 
 ## ranking
-ranking_df = map_df.sort_values(by="review_scores_rating")
-st.write(listings)
-# ranking_df = listings[[]]
+string = """
+    ### n-th most popular by rating
+"""
+st.markdown(string)
+bar_df = map_data.groupby("neighbourhood_cleansed", as_index=False).mean(numeric_only=True)
+st.bar_chart(data=bar_df, x="neighbourhood_cleansed", y="review_scores_rating")
 
-
-# fig = px.density_mapbox(
-#         data_frame=map_df,
-#         lat="latitude",
-#         lon="longitude",
-#         z="price_$",
-#         radius=10,
-#         center=dict(lat=map_df["latitude"].mean(), lon=map_df["longitude"].mean()),
-#         zoom=10,
-#         mapbox_style="open-street-map",
-#         color_continuous_scale="inferno"
-#     )
-# st.plotly_chart(fig, use_container_width=True)
+string = """
+    ### n-th most popular by price
+"""
+st.markdown(string)
+bar_df = map_data.groupby("neighbourhood_cleansed", as_index=False).mean(numeric_only=True)
+st.bar_chart(data=bar_df, x="neighbourhood_cleansed", y="price_$")
