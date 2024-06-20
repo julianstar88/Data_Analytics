@@ -2,13 +2,13 @@
   "lang":"en",
   "name":"pipeline",
   "version":"0.0.0",
-  "spacy_version":">=3.7.2,<3.8.0",
+  "spacy_version":">=3.7.5,<3.8.0",
   "description":"",
   "author":"",
   "email":"",
   "url":"",
   "license":"",
-  "spacy_git_version":"a89eae928",
+  "spacy_git_version":"a6d0fc360",
   "vectors":{
     "width":0,
     "vectors":0,
@@ -35,42 +35,42 @@
 
   ],
   "performance":{
-    "cats_score":0.1333333333,
+    "cats_score":0.7992701727,
     "cats_score_desc":"macro F",
-    "cats_micro_p":0.5,
-    "cats_micro_r":0.5,
-    "cats_micro_f":0.5,
-    "cats_macro_p":0.1,
-    "cats_macro_r":0.2,
-    "cats_macro_f":0.1333333333,
-    "cats_macro_auc":0.4,
+    "cats_micro_p":0.8124503732,
+    "cats_micro_r":0.8124503732,
+    "cats_micro_f":0.8124503732,
+    "cats_macro_p":0.8195806054,
+    "cats_macro_r":0.7829097463,
+    "cats_macro_f":0.7992701727,
+    "cats_macro_auc":0.9342315659,
     "cats_f_per_type":{
       "1":{
-        "p":0.0,
-        "r":0.0,
-        "f":0.0
+        "p":0.9095238095,
+        "r":0.8395604396,
+        "f":0.8731428571
       },
       "2":{
-        "p":0.5,
-        "r":1.0,
-        "f":0.6666666667
+        "p":0.801431127,
+        "r":0.7818499127,
+        "f":0.7915194346
       },
       "3":{
-        "p":0.0,
-        "r":0.0,
-        "f":0.0
+        "p":0.7868561279,
+        "r":0.6476608187,
+        "f":0.7105052125
       },
       "4":{
-        "p":0.0,
-        "r":0.0,
-        "f":0.0
+        "p":0.7668711656,
+        "r":0.7424406048,
+        "f":0.7544581619
       },
       "5":{
-        "p":0.0,
-        "r":0.0,
-        "f":0.0
+        "p":0.8332207968,
+        "r":0.9030369557,
+        "f":0.8667251975
       }
     },
-    "textcat_loss":0.1600000262
+    "textcat_loss":7.6285700713
   }
 }
