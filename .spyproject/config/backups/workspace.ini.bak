@@ -4,7 +4,7 @@ save_data_on_exit = True
 save_history = True
 save_non_project_files = False
 project_type = 'empty-project-type'
-recent_files = ['..\\..\\..\\.spyder-py3\\temp.py', '..\\Woche 4\\Airbnb-Analyse\\Correlation_Listing_Review.py', 'python_files\\Correlation_Review_Listings.py']
+recent_files = ['..\\..\\..\\.spyder-py3\\temp.py', 'python_files\\Correlation_Review_Listings.py', '..\\..\\..\\anaconda3\\Lib\\site-packages\\pandas\\core\\frame.py', 'python_files\\Listing_analysis.py', 'python_files\\best_hosts.py']
 
 [main]
 version = 0.2.0
